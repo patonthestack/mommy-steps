@@ -1,14 +1,26 @@
+import { Suspense } from 'react';
 import Link from 'next/link';
 import Layout from '../components/Layout';
-import { Heading } from '@chakra-ui/react';
+import { Heading, Box } from '@chakra-ui/react';
+import { BlogPost } from '../components/blog/BlogPost';
+
 
 const IndexPage = () => (
-	<Layout title="Home | Mommy sTeps">
-		<Heading as={'h1'}>The Mommy sTeps Blog 👋</Heading>
-		<p>
-			<Link href="/about">About</Link>
-		</p>
-	</Layout>
+	<Suspense
+		fallback={() => {
+			<Box>Error</Box>;
+		}}
+	>
+		<Layout title="Home | Mommy sTeps">
+			<Heading as={'h1'}>The Mommy sTeps Blog 👋</Heading>
+			<Box as="p">
+				<Link href="/about">About</Link>
+			</Box>
+			<Box>
+				<BlogPost />
+			</Box>
+		</Layout>
+	</Suspense>
 );
 
 export default IndexPage;
